@@ -1,0 +1,1 @@
+{"name":"Local: main2","url":"c:\\Users\\karti\\OneDrive\\Desktop\\vs code_1\\Misc\\main2.cpp","tests":[{"id":1771777166459,"input":"5\n1 2 3 4 5","output":"1 2 3 4 5 \r\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\karti\\OneDrive\\Desktop\\vs code_1\\Misc\\main2.cpp","group":"local","local":true}

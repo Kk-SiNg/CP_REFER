@@ -1,0 +1,2 @@
+#simply do any particular traversal, like pre/in/post-order and while traversing in both trees continuously
+#compare if the values_tree1_node == values_tree2_node.

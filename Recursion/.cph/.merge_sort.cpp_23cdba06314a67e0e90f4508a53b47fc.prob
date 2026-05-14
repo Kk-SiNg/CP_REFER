@@ -1,0 +1,1 @@
+{"name":"Local: merge_sort","url":"c:\\Users\\karti\\OneDrive\\Desktop\\vs code_1\\Recursion\\merge_sort.cpp","tests":[{"id":1771506591379,"input":"6\n4 5 2 1 9 5","output":"1 2 4 5 5 9"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\karti\\OneDrive\\Desktop\\vs code_1\\Recursion\\merge_sort.cpp","group":"local","local":true}
