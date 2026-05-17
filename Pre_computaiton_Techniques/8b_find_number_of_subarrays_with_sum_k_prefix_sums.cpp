@@ -6,7 +6,7 @@ using namespace std;
 // we'll carry the number of occurances of a sum
 
 int count_number_of_subarrays(vector <int> vect, int n, int k){
-    unordered_map <long long, int> mp;
+    unordered_map <long long, int> mp;  //to simply store how many times sm-k appeared for standing at some i.
 
     long long sm = 0;
     int counter = 0;

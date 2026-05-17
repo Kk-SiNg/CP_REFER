@@ -7,7 +7,7 @@ q queries <= 10^5
 n <= 10^3
 */
 
-//direct solution of 2 n sized loops inside a loop of Q will be TC:- O(n^2)*O(q) = O(10^11)
+//direct solution of 2 "n sized" loops inside a loop of Q will be TC:- O(n^2)*O(q) = O(10^11)
 //so we will precompute the sum of sub matrices with top left as (1,1) and bottom right as
 //the index at which we are saving that sum
 

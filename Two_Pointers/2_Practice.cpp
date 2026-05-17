@@ -99,9 +99,7 @@ int find_longest_one_array_with_at_most_k_zeroes(string str, int n, int k){
     while(r < n){
         if(str[r] == '0') zeroes++;
         if(zeroes > k){             //logic ---> we actually don't need to shrink down lesser than already found max_length
-            if(str[l] == 0){
-                zeroes--;
-            }
+            if(str[l] == 0) zeroes--;
             l++;
         }
         else max_len = max(max_len, r-l+1);
@@ -165,7 +163,7 @@ int max_subsets_with_all_given_char(){
         if(hash.size() == k){
             vector <int> for_min_occurance;
             for(auto i:hash) for_min_occurance.push_back(i.second);
-            max_count += find_min(for_min_occurance, for_min_occurance.size()) + 1;
+            max_count += find_min(for_min_occurance, for_min_occurance.size()) + 1;     //to simply find the min idx of all covered char's
         }
         r++;
     }
@@ -247,7 +245,7 @@ int number_of_subarrays_with_sum_equal_to_k_binary_Array(vector <int> vect, int 
     int l = 0, r = 0, sum = 0;
     while(r < n){
         sum += vect[r];
-        while(sum > k){
+        while(sum > k){         //shrink
             sum -= vect[l];
             l++;
         }
@@ -259,7 +257,7 @@ int number_of_subarrays_with_sum_equal_to_k_binary_Array(vector <int> vect, int 
         while(r < n){
             
             sum += vect[r];
-            while(sum > (k-1)){
+            while(sum > (k-1)){         //shrink
                 sum -= vect[l];
                 l++;
             }
@@ -310,7 +308,7 @@ void subarray_with_k_distinct_ele(vector <int> vect, int n, int k){
 //Q9. given a string str and another string a, find the minimum window present in str containing all characters of a in any order.
 //M1:- go through all subarrays in O(n^2) and check if current subarray has allcharacters of a via hash array of size 256 covering all char
 //M2:- two pointers and hash_map--->maintain a pre-initialised map containing all ele of a. while fix l = 0, and move until a valid
-//     substring is found(maintain a ctr to count number of ele of a covered with exact frequency) now start shrinking till ctr <= a.len
+//     substring is found(maintain a ctr to count number of ele of "a" covered with exact frequency) now start shrinking till ctr <= a.len
 //     repeat process till r < n
 //TC:- O(2n)
 void find_min_str_containing_window(string str, string a){
@@ -319,6 +317,7 @@ void find_min_str_containing_window(string str, string a){
     int l = 0, r = 0;
     int ctr = m;
     int starting_idx = -1, min_len = 1e7+5;
+    int overall_min_len = 1e7+5, overall_starting_idx = -1;
     unordered_map <char, int> mp;
 
     for(int i = 0; i < m; i++){
@@ -326,17 +325,23 @@ void find_min_str_containing_window(string str, string a){
     }
     while(r < n){
         if(mp.find(str[r]) != mp.end()) mp[str[r]]--;
-        if(mp.find(str[r]) != mp.end() && mp[str[r]] >= 0) ctr++;
+        if(mp.find(str[r]) != mp.end() && mp[str[r]] >= 0) ctr--;  //note:- value corresponding to every char can go -ve also, hence giving
+                                                                   //       scope for recovery.
 
-        while(ctr == m){
-            if(mp.find(str[l]) != mp.end()) mp[str[l]]++;
-            if(mp[str[l]] > 0) {
+        while(ctr == m){                                           //note:- first we are finding a big window than shrinking it to find 
+            if(mp.find(str[l]) != mp.end()) mp[str[l]]++;          //       smaller until condition of including all chars is met.
+            if(mp[str[l]] > 0) {    
                 min_len = r-l+1;
                 starting_idx = l;
-                ctr--;
+                ctr++;
             }
             l++;
         }
+        if(min_len < overall_min_len){
+            overall_starting_idx = starting_idx;
+            overall_min_len = min_len;
+        }
+        r++;
     }
 }
 

@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-// Q:- given q queries and an array with all n elements = 0 initially, in each query add k
+// Q:- given q queries and an array with all n elements = 0 'initially'. In each query add k
 // to every element in range a to b(inclusive).
 
 //naive solution: TC:- O(q*n)
