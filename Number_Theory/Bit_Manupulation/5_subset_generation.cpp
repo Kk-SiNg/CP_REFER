@@ -2,7 +2,7 @@
 using namespace std;
 
 //logics:- 
-//1. total number of subsets of a number are 2^n. So we can represent all subsets of a set with cardanality = n using a n-bit binary
+//1. total number of subsets of n numbers are 2^n. So we can represent all subsets of a set with cardanality = n using a n-bit binary
 //   so simply consider all such subsets from 0 to n-1 and for each mask of a subset check the set bits
 //   (note-> that each mask just represent the indices that are taken as set bit and indices omitted = unset_bit).
 //TC:- O(n*(2^n))

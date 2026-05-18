@@ -3,7 +3,7 @@
 using namespace std;
 
 /*LOGICS:-
-1. in any subarray either left or right half is always sorted. 
+1. in any "subarray" either left or right half is always sorted. 
 So check in sorted half for element to be found and if not found 
 then new search space is other half.
 */
@@ -14,13 +14,13 @@ int no_duplicate_element_index_return(vector <int> vect, int n, int k){
     while(hi - lo > 1){
         mid = (hi+lo)/2;
         //sorted left
-        if(vect[lo] <= vect[mid]){      //note if this condition is met then this half is sorted
-            if(vect[lo] <= k && vect[mid] >= k) hi = mid;       
-            else lo = mid+1;
+        if(vect[lo] <= vect[mid]){      //note if this condition is met then left half is sorted
+            if(vect[lo] <= k && vect[mid] >= k) hi = mid;       //k lies on sorted half so shrink the window to this half
+            else lo = mid+1;                                    //k lies on other non sorted half, so shrink window to unsorted half.
         }
         //sorted right
         else{
-            if(vect[mid] <= k && vect[hi] >= k) lo = mid;
+            if(vect[mid] <= k && vect[hi] >= k) lo = mid;       //similar thoughts as for left sorted half.
             else hi = mid-1;
         }
     }

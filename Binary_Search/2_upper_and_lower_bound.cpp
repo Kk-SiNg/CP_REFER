@@ -9,15 +9,15 @@ int upper_bound(vector <int> &vect, int n, int k){
 
     while(hi-lo > 1){
         mid = (lo + hi)/2;
-        if(mid >= k){
-            hi = mid - 1;
+        if(vect[mid] <= k){
+            lo = mid+1;
         }
         else{
-            lo = mid;
+            hi = mid;
         }
     }
-    if(vect[lo] >= k) return lo;        //note--->upper_bound function returns the lowest value > k, hence first check for low
-    else if(vect[hi] >= k) return hi;
+    if(vect[hi] >= k) return hi;        //note--->upper_bound function returns the lowest value > k, hence first check for hi
+    else if(vect[lo] >= k) return lo;
     else return -1;
 }
 

@@ -10,8 +10,9 @@ void printBinary(int a){
     cout << endl;
 }
 
-int main(){int a = 13;
-    //suppose we are to take input of fruits in  2 diff arrays and then find the comman ones.
+int main(){
+    int a = 13;
+    //suppose we are to take input of fruits in 2 diff arrays and then find the comman ones.
 
     int basket1 = 0, basket2 = 0;
     int b1, b2;
@@ -29,7 +30,7 @@ int main(){int a = 13;
     cout << basket1 << " " << basket2 << "\n";
     cout << "number of common fruits: " << __builtin_popcount(basket1&basket2) << "\n";
 
-//=========================================================================================================================
+//=====================================================================================================================================================================
     //Workers example(see onenote):
     int number_of_workers;
     int available_days;
@@ -55,7 +56,7 @@ int main(){int a = 13;
     for(int i = 0; i < number_of_workers; i++){
         for(int j = i+1; j < number_of_workers; j++){
             int intersection = mask[i] & mask[j];
-            if(intersection > max){
+            if(__builtin_popcount(intersection) > __builtin_popcount(max)){
                 max = intersection;
                 worker_pair = {i,j};
             }

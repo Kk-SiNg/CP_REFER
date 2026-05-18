@@ -24,7 +24,7 @@ int main(){
         cout << "even\n";
     }
     
-    //multiply/divide
+    //multiply/divide by 2
     printBinary(a>>1); //div
     cout << (a>>1) << endl;
 
@@ -57,7 +57,7 @@ int main(){
     }
     cout << (record1 ^ record2) << endl;
 
-    //given an array with all enteries occuring even number of times, find it?
+    //given an array with all enteries occuring even number of times, except one element, find it?
     int ans = 0;
     int x;
     int t;

@@ -14,7 +14,7 @@ void seive(vector <int> vect, int n){
     for(int i = 2; i <= 2*1e5; i++){
         int count = 0;
         for(int j = i; j <= 2*1e5; j+=i){
-            count += vect[j];
+            count += vect[j];                   //note that we used hashing to find how many times an element is present in our array
         }
         divisor_count[i] = count;
     }

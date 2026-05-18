@@ -17,7 +17,7 @@ void sieve_to_find_lpf_and_hpf_of_n(){
         if(vect[i] == true){
             for(int j = i*2; j <= n; j+=i){
                 vect[j] = 0;
-                hpf[j] = i;                     // just mark j with latest prime that can divide j
+                hpf[j] = i;                     //just mark j with latest prime that can divide j
                 if(lpf[j] == 0) lpf[j] = i;     //only mark for the first time
             }
         }
