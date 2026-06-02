@@ -4,7 +4,7 @@
 /*
 logic :-
 first choose a pivot suppose we are choosing pivot as the first or the vect element at lo position
-of current array, then put this pivot at it's right position i.e. all smalls on left and all bigs
+of current array, then put this pivot at it's correct position i.e. all smalls on left and all bigs
 on right, repeat this for array on left of pivot, right of pivot until their is only 1 element in left
 or right divisions(array).
 */

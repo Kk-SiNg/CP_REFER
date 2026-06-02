@@ -29,11 +29,25 @@ void solve(){
     }
     
     ans--;
-    ll final_ans = -2e18;
-    for(ll i = 0; i < n; i++){
-        final_ans = max(final_ans, invert(vect, n, ans, i));
+    map <int, int> mp;
+    int mini = 1e9+1;
+    for(int i = n-1; i >= 0; i--){
+        if(vect[i] < mini) mp[vect[i]] = i, mini = vect[i];
     }
-    cout << final_ans << "\n";
+    vector <int> temp;
+    for(auto it:mp){
+        temp.push_back(it.first);
+    }
+    int m_len = mp[temp[0]];
+    int idx = mp[temp[0]];
+    for(int i = 0; i < temp.size()-1; i++){
+        if(mp[temp[i+1]] - mp[temp[i]]-1 >= m_len){
+            idx = mp[temp[i+1]];
+            m_len = mp[temp[i+1]] - mp[temp[i]]-1;
+        }
+    }
+    // cout << idx << " ";
+    cout << invert(vect, n, ans, idx) << "\n";
 }
 
 int main(){

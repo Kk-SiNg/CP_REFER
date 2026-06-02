@@ -1,18 +1,11 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-#define ll long long
 
-void solve(){
-    int a = 2;
-    cout << a++ << a++ << "\n";
-}
+int main() {
+    long long MOD = 1e9 + 7;
+    long long n = 100000;
+    long long product = 1;
 
-int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    ll t;
-    cin >> t;
-    while(t--){
-        solve();
-    }
+    cout << (n*n)%MOD << endl;
+    return 0;
 }
