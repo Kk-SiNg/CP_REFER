@@ -10,14 +10,14 @@ using namespace std;
 // previously in this stage) is valid we considered it in ds, and moved on, and obviously this ele will be removed and next will be
 // considerd once we are returned to previous node.
 vector <vector<int>> ans;
-void combination_sums(int idx, int target, vector<int>&vect, int n, vector<int>&ds){
+void combination_sums(int idx, int target, vector<int>&vect, int n, vector<int>ds){
     if(idx >= n){
         if(target == 0) ans.push_back(ds);
         return;
     }
 
     for(int i = idx; i < n; i++){
-        if(i>idx && vect[i] == vect[i-1]) continue;     //don't call recursion for same ele for which we have
+        if(i>idx && vect[i] == vect[i-1]) continue;     //don't call recursion for same value element for which recur is already called
         if(vect[i] > target) break;                     //vect already sorted so anything above i will be > vect[i]
         ds.push_back(vect[i]);
         combination_sums(i+1, target-vect[i], vect, n, ds);
@@ -41,6 +41,4 @@ int main(){
         }
         cout << endl;
     }
-
-
 }

@@ -1,13 +1,13 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 // Q:- find all combinations of given array having sum of elements == k, any number can be used infinite times.
 
-
-//first of all in combination sums order of elements chosen doesn't matter(like in subsequence sums)
+//first of all in combination sums order of elements chosen doesn't matter(unlike in subsequence sums)
 /* logic:- 
 We will repeat the same thing again and again i.e. we will give chance to every element
 of being chosen in contributing to sum, note:-whether to repeat choosing same element depends on Q.
 */
-#include <bits/stdc++.h>
-using namespace std;
 
 vector<vector<int>> ans;
 
@@ -33,7 +33,7 @@ void combination_sums(int index, int target, vector <int> vect, vector <int> tem
     }
     combination_sums(index+1, target, vect, temp_Array);
 }
-//note:- if it was given in question that ith number is allowed to be used only 1 times, than simply do index->index+1 in line 30
+//note:- if it was given in question that ith number is allowed to be used only 1 times, than simply do index->index+1 in line 31
 //       i.e. start looking from the next index rather than restarting from the first and doing pick until 1st ele fails to give target>0
 //       but note that this time we'll get duplicate combinations like 112, 121... so to avoid this use something like set resulting in an
 //       overall TC:- O(k*2^t*log(n))

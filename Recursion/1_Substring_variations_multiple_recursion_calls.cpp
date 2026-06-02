@@ -3,7 +3,7 @@
 
 using namespace std;
 //TC :- O(2^n)
-//Space :- O(2^n)
+//Space :- O(n)
 int fibonachi(int a){
     if(a <= 1) return a;
     return fibonachi(a-1) + fibonachi(a-2);
