@@ -1,0 +1,1 @@
+{"name":"Local: Longest_increasing_subsequence","url":"c:\\Users\\karti\\Desktop\\CPP_Refer\\DP\\Longest_increasing_subsequence.cpp","tests":[{"id":1780485038668,"input":"5\n4 1 1 3 3","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\karti\\Desktop\\CPP_Refer\\DP\\Longest_increasing_subsequence.cpp","group":"local","local":true}
