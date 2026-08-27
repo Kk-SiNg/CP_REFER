@@ -2,7 +2,7 @@
 using namespace std;
 
 //Q. given T<=10 test cases, each test case contains a string of size n <= 10^5 & q queries <= 10^5
-//each query contains 2 int a, b <= n; for each query find if it is possible to rearrange the ele...
+//each query contains 2 int l, r <= n; for each query find if it is possible to rearrange the ele...
 //of string in range l to r st: formed substring in l to r(inclusive) is a palandrome.
 
 /* LOGICS:-

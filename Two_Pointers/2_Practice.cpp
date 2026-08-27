@@ -305,7 +305,7 @@ void subarray_with_k_distinct_ele(vector <int> vect, int n, int k){
     }
 }
 
-//Q9. given a string str and another string a, find the minimum window present in str containing all characters of a in any order.
+//Q9.  given a string str and another string a, find the minimum window present in str containing all characters of a in any order.
 //M1:- go through all subarrays in O(n^2) and check if current subarray has allcharacters of a via hash array of size 256 covering all char
 //M2:- two pointers and hash_map--->maintain a pre-initialised map containing all ele of a. while fix l = 0, and move until a valid
 //     substring is found(maintain a ctr to count number of ele of "a" covered with exact frequency) now start shrinking till ctr <= a.len

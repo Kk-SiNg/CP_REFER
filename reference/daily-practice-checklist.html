@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reference — Daily Practice Checklist</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <style>
+    .ref-section {
+      margin: 1.5rem 0;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .checklist-item:last-child { border-bottom: none; }
+    .check-box {
+      min-width: 22px; height: 22px;
+      border: 2px solid var(--accent);
+      border-radius: 4px;
+      margin-top: 2px;
+    }
+    .time-tag {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      min-width: 55px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Daily Practice Checklist</h1>
+  <p style="color:var(--text-muted);margin-bottom:2rem;">
+    Print this or keep it open. Follow it every day. No decisions needed — just execute.
+  </p>
+
+  <div class="ref-section">
+    <h3>Session Structure (2 hours)</h3>
+
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <span class="time-tag">10 min</span>
+      <div>
+        <strong>Warmup.</strong> Solve 1 problem at 1200-1300. Pick from 
+        <a href="https://codeforces.com/problemset?order=BY_RATING_ASC&minDifficulty=1200&maxDifficulty=1300" target="_blank">CF problemset</a>.
+        Prioritize speed. Don't overthink.
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <span class="time-tag">60 min</span>
+      <div>
+        <strong>Push.</strong> Attempt 1-2 problems at 1400-1500. 
+        <a href="https://codeforces.com/problemset?order=BY_RATING_ASC&minDifficulty=1400&maxDifficulty=1500" target="_blank">CF problemset, 1400-1500</a>.
+        Struggle is the point. If stuck for 30+ min on one, switch to the second.
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <span class="time-tag">30 min</span>
+      <div>
+        <strong>Upsolve.</strong> For problems you couldn't crack:
+        read the editorial, understand the idea, then implement from scratch
+        (close the editorial tab before coding). Note: upsolving > solving easy problems.
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <div class="check-box"></div>
+      <span class="time-tag">5 min</span>
+      <div>
+        <strong>Log.</strong> Write 2-3 bullets in a text file:
+        what pattern did you see? What tripped you up? What tag/technique was key?
+      </div>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <h3>Bad Day Protocol</h3>
+    <p>When you're exhausted, sick, or have exams:</p>
+    <ol>
+      <li>Solve <strong>one</strong> problem at any rating (even 800)</li>
+      <li>That's it. Session complete. Chain preserved.</li>
+    </ol>
+  </div>
+
+  <div class="ref-section">
+    <h3>Weekly Contest Routine</h3>
+    <ol>
+      <li>Enter every rated contest you can (Div 2, Div 3, Div 4, Educational)</li>
+      <li>During contest: aim for A+B in ≤15 min, then all remaining time on C</li>
+      <li>After contest: upsolve C (and D if time permits) within 24 hours</li>
+      <li>Read other people's solutions for C — learn the cleanest approach</li>
+    </ol>
+  </div>
+
+  <div class="ref-section">
+    <h3>Problem Selection by Weak Tag</h3>
+    <p>When you don't know what to practice, pick from your weakest tags at 1400:</p>
+    <table>
+      <thead><tr><th>Tag</th><th>Your Solve Count</th><th>CF Link</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>DP</td><td>47</td>
+          <td><a href="https://codeforces.com/problemset?order=BY_RATING_ASC&tags=dp&minDifficulty=1400&maxDifficulty=1500" target="_blank">1400-1500 DP problems</a></td>
+        </tr>
+        <tr>
+          <td>Data structures</td><td>41</td>
+          <td><a href="https://codeforces.com/problemset?order=BY_RATING_ASC&tags=data+structures&minDifficulty=1400&maxDifficulty=1500" target="_blank">1400-1500 DS problems</a></td>
+        </tr>
+        <tr>
+          <td>Graphs/DFS</td><td>6</td>
+          <td><a href="https://codeforces.com/problemset?order=BY_RATING_ASC&tags=dfs+and+similar&minDifficulty=1300&maxDifficulty=1400" target="_blank">1300-1400 Graph problems</a></td>
+        </tr>
+        <tr>
+          <td>Strings</td><td>33</td>
+          <td><a href="https://codeforces.com/problemset?order=BY_RATING_ASC&tags=strings&minDifficulty=1400&maxDifficulty=1500" target="_blank">1400-1500 String problems</a></td>
+        </tr>
+        <tr>
+          <td>Bitmasks</td><td>44</td>
+          <td><a href="https://codeforces.com/problemset?order=BY_RATING_ASC&tags=bitmasks&minDifficulty=1400&maxDifficulty=1500" target="_blank">1400-1500 Bitmask problems</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="lesson-footer">
+    <p>Related: <a href="../lessons/0001-the-consistency-system.html">Lesson 01 — The Consistency System</a></p>
+  </div>
+
+</body>
+</html>

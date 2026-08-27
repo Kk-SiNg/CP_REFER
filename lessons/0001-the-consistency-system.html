@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 01 — The Consistency System</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <style>
+    .profile-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .profile-stat:last-child { border-bottom: none; }
+    .profile-stat .label { color: var(--text-muted); }
+    .profile-stat .value { font-weight: 600; font-family: var(--font-mono); }
+    .value.good { color: var(--success); }
+    .value.bad { color: var(--danger); }
+    .value.neutral { color: var(--warning); }
+
+    .calendar-month {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 3px;
+      max-width: 260px;
+      margin: 0.75rem 0;
+    }
+    .calendar-day {
+      aspect-ratio: 1;
+      border-radius: 3px;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+    .calendar-day.done { background: var(--accent); color: var(--bg); font-weight: 600; }
+    .calendar-day.skip { background: rgba(239, 68, 68, 0.3); }
+    .calendar-day.today { outline: 2px solid var(--warning); outline-offset: 1px; }
+    .calendar-day.future { background: var(--bg); border: 1px dashed var(--border); }
+    .day-label { font-size: 0.6rem; color: var(--text-muted); text-align: center; font-weight: 600; }
+
+    .system-step {
+      display: flex;
+      gap: 1rem;
+      margin: 1rem 0;
+      align-items: flex-start;
+    }
+    .system-step .step-num {
+      min-width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 700;
+      font-size: 0.9rem;
+      font-family: var(--font-mono);
+    }
+    .system-step .step-content h4 {
+      margin-bottom: 0.3rem;
+    }
+    .system-step .step-content p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .commitment-box {
+      background: linear-gradient(135deg, rgba(3, 168, 158, 0.08) 0%, rgba(110, 231, 183, 0.05) 100%);
+      border: 2px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .commitment-box h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .commitment-box .commitment-text {
+      font-size: 1.05rem;
+      font-style: italic;
+      margin: 1rem 0;
+      line-height: 1.6;
+    }
+    .commitment-box .date {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .checklist {
+      list-style: none;
+      padding-left: 0;
+    }
+    .checklist li {
+      padding: 0.5rem 0;
+      padding-left: 1.75rem;
+      position: relative;
+    }
+    .checklist li::before {
+      content: '☐';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>The Consistency System</h1>
+  <div class="lesson-meta">
+    <span class="lesson-number">Lesson 01</span> · Prerequisite to everything · Aug 2026
+  </div>
+
+  <p>
+    This lesson isn't about algorithms. It's about the thing that makes algorithm knowledge
+    actually compound into rating points: <mark>never breaking the chain</mark>.
+  </p>
+
+  <h2>Your Profile, Honestly</h2>
+
+  <div class="card card-accent">
+    <div class="profile-stat">
+      <span class="label">Current rating</span>
+      <span class="value neutral">1161</span>
+    </div>
+    <div class="profile-stat">
+      <span class="label">Max rating</span>
+      <span class="value neutral">1195</span>
+    </div>
+    <div class="profile-stat">
+      <span class="label">Problems solved (all time)</span>
+      <span class="value good">462</span>
+    </div>
+    <div class="profile-stat">
+      <span class="label">Problems at 1400+ rating</span>
+      <span class="value bad">~19</span>
+    </div>
+    <div class="profile-stat">
+      <span class="label">Longest streak ever</span>
+      <span class="value bad">15 days</span>
+    </div>
+    <div class="profile-stat">
+      <span class="label">Contests participated</span>
+      <span class="value good">18</span>
+    </div>
+    <div class="profile-stat">
+      <span class="label">Rated contests with negative Δ</span>
+      <span class="value neutral">7 of 18</span>
+    </div>
+  </div>
+
+  <p>
+    462 problems is a <em>lot</em>. Most people reaching Specialist have solved fewer. 
+    Your problem isn't volume — it's that the volume is concentrated in bursts 
+    separated by dead weeks. Every time you restart, your brain has partially evicted 
+    the patterns you were building. You're spending effort re-climbing rather than 
+    pushing higher.
+  </p>
+
+  <h2>Why Consistency Beats Volume</h2>
+
+  <p>
+    There's a concept in cognitive science called the <strong>spacing effect</strong>
+    (<a href="https://en.wikipedia.org/wiki/Spacing_effect" target="_blank">Wikipedia</a>):
+    practice distributed over time produces stronger, longer-lasting memories than the same
+    amount of practice crammed into one session.
+  </p>
+
+  <div class="card card-warning">
+    <h4>⚡ The Math</h4>
+    <p>
+      Solving 3 problems per day for 90 consecutive days = <strong>270 problems</strong>.<br>
+      Solving 8 problems per day for 10 days, then 0 for 10 days, repeated = <strong>270 problems</strong>.<br><br>
+      Same volume. Radically different outcomes. The first builds compound pattern recognition.
+      The second builds and demolishes it in cycles.
+    </p>
+  </div>
+
+  <p>
+    Look at your heatmap. The green blocks come in clusters. Dec-Jan is dead. 
+    Then Feb-Apr is intense. May drops. Jun-Jul has gaps. 
+    Every restart costs you 3-5 days of "warming back up" — that's wasted practice.
+  </p>
+
+  <h2>The System: 30-Day Chain</h2>
+
+  <p>
+    Here's a concrete, no-motivation-required system. The goal is simple:
+    <strong>solve at least one CF problem every single day for 30 days straight.</strong>
+    Not 5 problems. Not a whole contest. Just one.
+  </p>
+
+  <div class="system-step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h4>Set the floor absurdly low</h4>
+      <p>
+        Your minimum daily commitment is <strong>1 problem</strong>. Any rating. 
+        Even an 800-rated problem counts. The point is to never have a zero day.
+        On good days, you'll naturally do 3-5+. On bad days, you still do 1.
+      </p>
+    </div>
+  </div>
+
+  <div class="system-step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h4>Pick a fixed time slot</h4>
+      <p>
+        Tie it to something you already do. "After lunch" or "after dinner" — 
+        not "when I feel like it." Motivation is unreliable. Time slots are not.
+        You said you have 2+ hours. Block 2 hours at the same time every day.
+      </p>
+    </div>
+  </div>
+
+  <div class="system-step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h4>Use a daily practice template</h4>
+      <p>
+        Every session follows this structure. No deciding what to do — just execute:
+      </p>
+    </div>
+  </div>
+
+  <div class="card card-accent">
+    <h4>📋 Daily Session Template (2 hours)</h4>
+    <table>
+      <thead>
+        <tr><th>Block</th><th>Time</th><th>What</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Warmup</td>
+          <td>10 min</td>
+          <td>Solve 1 problem at your comfort rating (1200-1300)</td>
+        </tr>
+        <tr>
+          <td>Push</td>
+          <td>60 min</td>
+          <td>Attempt 1-2 problems at your stretch rating (1400-1500)</td>
+        </tr>
+        <tr>
+          <td>Upsolve</td>
+          <td>30 min</td>
+          <td>Read editorial for problems you couldn't solve, implement the solution</td>
+        </tr>
+        <tr>
+          <td>Log</td>
+          <td>5 min</td>
+          <td>Write 2-3 bullet points: what you learned, what tripped you up</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="system-step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <h4>Track the chain visually</h4>
+      <p>
+        Your CF heatmap is already a chain tracker. Make it <em>your</em> scoreboard.
+        Open your profile every day and look at the green. The chain becomes something
+        you don't want to break. Jerry Seinfeld used this exact method to write jokes
+        — "Don't break the chain."
+      </p>
+    </div>
+  </div>
+
+  <div class="system-step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <h4>Plan for bad days in advance</h4>
+      <p>
+        You <em>will</em> have days where you're exhausted, have exams, or just don't
+        feel like it. Those are "800-rated problem" days. Have a mental list of easy
+        problems ready. The rule is: <strong>never zero, even if it's tiny.</strong>
+      </p>
+    </div>
+  </div>
+
+  <h2>What Changes at 30 Days</h2>
+
+  <p>Here's what happens when your max streak goes from 15 → 30:</p>
+
+  <div class="card card-success">
+    <h4>✓ Pattern recognition compounds</h4>
+    <p>
+      After 30 consecutive days of seeing problems, your brain starts recognizing
+      problem "shapes" — that "this feels like a DSU problem" or "this has a binary
+      search on answer structure." This intuition <em>cannot</em> be built in bursts.
+    </p>
+  </div>
+
+  <div class="card card-success">
+    <h4>✓ Contest performance stabilizes</h4>
+    <p>
+      Your rating graph oscillates between 1020 and 1195. That's a 175-point swing.
+      Consistent practice narrows this band. You stop having "cold" contests because
+      you're never cold.
+    </p>
+  </div>
+
+  <div class="card card-success">
+    <h4>✓ The restart tax disappears</h4>
+    <p>
+      Every break costs you ~3-5 days of "remembering where I was." Over 3 months with
+      4-5 breaks, that's 15-25 days of wasted practice. That's an entire month of
+      rating-building work, gone.
+    </p>
+  </div>
+
+  <h2>Your Weak Spots (By the Numbers)</h2>
+
+  <p>
+    Once the consistency system is running, <em>what</em> you practice matters.
+    Here's what your CF tags and problem ratings reveal:
+  </p>
+
+  <div class="card">
+    <h4>Problem Rating Distribution — The Wall</h4>
+    <div class="rating-bar">
+      <span class="rating-bar-label">800</span>
+      <div class="rating-bar-track"><div class="rating-bar-fill" style="width:100%; background: var(--cf-newbie);"></div></div>
+      <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);">120</span>
+    </div>
+    <div class="rating-bar">
+      <span class="rating-bar-label">900</span>
+      <div class="rating-bar-track"><div class="rating-bar-fill" style="width:39%; background: var(--cf-newbie);"></div></div>
+      <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);">47</span>
+    </div>
+    <div class="rating-bar">
+      <span class="rating-bar-label">1000</span>
+      <div class="rating-bar-track"><div class="rating-bar-fill" style="width:33%; background: var(--cf-newbie);"></div></div>
+      <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);">40</span>
+    </div>
+    <div class="rating-bar">
+      <span class="rating-bar-label">1100</span>
+      <div class="rating-bar-track"><div class="rating-bar-fill" style="width:33%; background: var(--cf-newbie);"></div></div>
+      <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);">40</span>
+    </div>
+    <div class="rating-bar">
+      <span class="rating-bar-label">1200</span>
+      <div class="rating-bar-track"><div class="rating-bar-fill" style="width:69%; background: var(--cf-pupil);"></div></div>
+      <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);">83</span>
+    </div>
+    <div class="rating-bar">
+      <span class="rating-bar-label">1300</span>
+      <div class="rating-bar-track"><div class="rating-bar-fill" style="width:87%; background: var(--cf-pupil);"></div></div>
+      <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);">104</span>
+    </div>
+    <div class="rating-bar">
+      <span class="rating-bar-label">1400</span>
+      <div class="rating-bar-track"><div class="rating-bar-fill" style="width:12%; background: var(--cf-specialist);"></div></div>
+      <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);">15</span>
+    </div>
+    <div class="rating-bar">
+      <span class="rating-bar-label">1500+</span>
+      <div class="rating-bar-track"><div class="rating-bar-fill" style="width:3%; background: var(--cf-expert);"></div></div>
+      <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);">~4</span>
+    </div>
+  </div>
+
+  <p>
+    See the cliff at 1400? That's your wall. You've solved <strong>104 problems at 1300</strong>
+    but only <strong>15 at 1400</strong>. To reach Specialist, you need to move your comfort zone
+    up by exactly one notch. The daily session template above is designed to do this — the "Push"
+    block targets 1400-1500 problems specifically.
+  </p>
+
+  <h2>Topic Roadmap for the Next 12 Weeks</h2>
+
+  <p>
+    Based on your tag distribution, here's a prioritized order. We'll cover these in
+    future lessons:
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>Week</th><th>Topic</th><th>Why Now</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1-2</td><td>Consistency + Constructive/Greedy at 1400</td><td>Build on strengths at a harder level</td></tr>
+      <tr><td>3-4</td><td>Binary Search on Answer</td><td>Common 1400-pattern, you have BS basics</td></tr>
+      <tr><td>5-6</td><td>DP fundamentals at 1400+</td><td>Your DP count is low (47), it dominates C problems</td></tr>
+      <tr><td>7-8</td><td>Graph techniques (DSU, toposort)</td><td>Only 6 DFS problems solved — major gap</td></tr>
+      <tr><td>9-10</td><td>Bitmask DP + Meet in the Middle</td><td>Bridges greedy intuition to DP</td></tr>
+      <tr><td>11-12</td><td>Segment Trees / BIT basics</td><td>Opens up data structure problems</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Minimum Viable Action — Today</h2>
+
+  <div class="card card-accent">
+    <h4>🎯 Your task right now</h4>
+    <ol>
+      <li>
+        Decide your fixed daily practice time slot. Write it down. 
+        <em>(e.g., "9 PM - 11 PM daily")</em>
+      </li>
+      <li>
+        Go to <a href="https://codeforces.com/problemset?order=BY_RATING_ASC&tags=greedy&minDifficulty=1400&maxDifficulty=1400" target="_blank">CF Problemset → greedy, 1400-rated</a> 
+        and attempt your first problem. Don't solve at 1300. Push to 1400.
+      </li>
+      <li>
+        If you solve it — great. If you can't after 40 min, read the editorial, 
+        implement it yourself (don't copy), and note what concept you were missing.
+      </li>
+    </ol>
+  </div>
+
+  <h2>Practice Problems — Start Here</h2>
+
+  <p>These are hand-picked 1400-rated greedy/constructive problems — your strong tags, but at your stretch rating:</p>
+
+  <ol>
+    <li><a href="https://codeforces.com/problemset/problem/1703/E" target="_blank">1703E — Mirror Grid</a> <span class="tag tag-specialist">1400</span> <span class="tag tag-warning">constructive</span></li>
+    <li><a href="https://codeforces.com/problemset/problem/1579/D" target="_blank">1579D — Productive Meeting</a> <span class="tag tag-specialist">1400</span> <span class="tag tag-warning">greedy</span></li>
+    <li><a href="https://codeforces.com/problemset/problem/1462/D" target="_blank">1462D — Add to Neighbour and Remove</a> <span class="tag tag-specialist">1400</span> <span class="tag tag-warning">greedy</span></li>
+  </ol>
+
+  <hr>
+
+  <h2>Knowledge Check</h2>
+
+  <div class="quiz">
+    <p class="quiz-question">
+      You solved 6 problems in 2 hours yesterday and feel great. Today you're exhausted 
+      after exams. What should you do?
+    </p>
+    <div class="quiz-options">
+      <div class="quiz-option" data-correct="false">Skip today, start fresh tomorrow with high energy</div>
+      <div class="quiz-option" data-correct="true">Solve one 800-rated problem in 5 minutes and keep the chain alive</div>
+      <div class="quiz-option" data-correct="false">Do a full 2-hour session anyway to stay disciplined</div>
+      <div class="quiz-option" data-correct="false">Upsolve yesterday's hard problems instead of new ones</div>
+    </div>
+    <div class="quiz-feedback"
+         data-correct="✓ Correct. The chain matters more than any single session's volume. A 5-minute 800-rated problem keeps the streak alive without burning you out."
+         data-incorrect="✗ Think about it differently. The goal is never breaking the chain. Even a tiny contribution is infinitely better than a zero day.">
+    </div>
+  </div>
+
+  <div class="quiz">
+    <p class="quiz-question">
+      Your rating dropped from 1195 to 1161 after two bad contests. What should your 
+      practice focus on this week?
+    </p>
+    <div class="quiz-options">
+      <div class="quiz-option" data-correct="false">Solve more 800-1200 problems to rebuild confidence</div>
+      <div class="quiz-option" data-correct="false">Stop doing contests until you've studied more theory</div>
+      <div class="quiz-option" data-correct="true">Continue solving 1400-rated problems and enter the next contest as usual</div>
+      <div class="quiz-option" data-correct="false">Analyse only the problems you got wrong in those contests</div>
+    </div>
+    <div class="quiz-feedback"
+         data-correct="✓ Correct. Rating drops are noise. Your practice difficulty should be set by your target (1400+), not your current mood. Keep pushing and keep entering contests."
+         data-incorrect="✗ Rating drops feel bad, but reacting to them by dropping difficulty is exactly what creates the plateau. Stay at 1400. Keep entering contests. The system handles the rest.">
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="commitment-box">
+    <h3>⛓️ The Chain Starts Today</h3>
+    <p class="commitment-text">
+      "I will solve at least one Codeforces problem every day for the next 30 days.
+      <br>No exceptions. No zero days."
+    </p>
+    <p class="date">Day 1 of 30 — August 26, 2026</p>
+  </div>
+
+  <div class="lesson-footer">
+    <p>
+      <strong>Next lesson →</strong> <em>Greedy at 1400: Patterns That Separate Newbie from Specialist</em>
+    </p>
+    <p>
+      <strong>Recommended reading:</strong> 
+      <a href="https://codeforces.com/blog/entry/98806" target="_blank">How to practice Competitive Programming — Um_nik</a>
+    </p>
+    <p>
+      <strong>Questions?</strong> Ask your teacher (me) anything. I can explain any concept, 
+      walk through a problem, or adjust the plan. Just say <code>/teach</code>.
+    </p>
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>
