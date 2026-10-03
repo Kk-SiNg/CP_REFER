@@ -45,7 +45,7 @@ void find_all_subsequence_with_sum_k(int index, vector <int> current_arr, int su
 //TC :- O(2^n)
 //SC :- O(n)
 //Note:- that this technique using boolean and if statement is IMP for printing only 1 element or finding if such ele exist...
-//feel that once a single true is returned then their will be no further recursion calls.
+//feel that once a single true is returned then their will be no further recursion calls and a cascade of true's back.
 bool find_any_one_subsequence_with_sum_k(int index, vector <int> current_arr, int n, vector <int> &vect, int sum, int k){
     if(index >= n){
         if(sum == k) {

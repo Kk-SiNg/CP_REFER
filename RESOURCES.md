@@ -24,6 +24,7 @@
 ### Practice Problem Sets
 - [CSES Problem Set](https://cses.fi/problemset/)
   ~300 carefully curated problems covering all standard CP topics. Use for: systematic topic-by-topic practice.
+  **Active use:** Lesson 002 maps CSES sections (DP → Graphs → Range Queries) to CF weak spots in an 8-week plan. Solve alongside the CPH book (Ch 7=DP, Ch 11-12=Graphs, Ch 9=Range Queries).
 
 - [A2OJ Ladders (archived)](https://earthshakira.github.io/a2oj-clientside/server/Ladders.html)
   Rating-sorted CF problems. Use for: progressive difficulty practice at your exact level.

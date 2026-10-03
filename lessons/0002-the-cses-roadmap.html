@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 002 — The CSES Roadmap: From Pupil to Specialist</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <style>
+    /* ── Roadmap-specific styles ── */
+    .phase {
+      position: relative;
+      padding-left: 2rem;
+      margin: 1.5rem 0;
+    }
+    .phase::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .phase-dot {
+      position: absolute;
+      left: 0;
+      top: 0.35rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+    .phase-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .phase-week {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      background: var(--accent-glow);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .phase-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin: 0.75rem 0;
+    }
+    @media (max-width: 600px) {
+      .problem-grid { grid-template-columns: 1fr; }
+    }
+    .problem-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.85rem;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+    }
+    .problem-link:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .problem-link .source {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .source-cses { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+    .source-cf   { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+    .problem-link .name {
+      color: var(--text);
+      flex: 1;
+    }
+    .problem-link .diff {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .daily-box {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+    .daily-time {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+
+    .progress-track {
+      display: flex;
+      gap: 3px;
+      margin: 0.5rem 0;
+    }
+    .progress-seg {
+      height: 6px;
+      border-radius: 3px;
+      flex: 1;
+    }
+    .seg-done { background: var(--success); }
+    .seg-current { background: var(--accent); animation: pulse-seg 2s infinite; }
+    .seg-todo { background: var(--border); }
+
+    @keyframes pulse-seg {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .checklist {
+      list-style: none;
+      padding-left: 0;
+    }
+    .checklist li {
+      padding: 0.4rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .checklist li::before {
+      content: '☐';
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+    .stat-card {
+      flex: 1;
+      min-width: 140px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      text-align: center;
+    }
+    .stat-card .stat-num {
+      font-size: 1.8rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      line-height: 1;
+    }
+    .stat-card .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+    .num-pupil { color: var(--cf-pupil); }
+    .num-specialist { color: var(--cf-specialist); }
+    .num-warning { color: var(--warning); }
+  </style>
+</head>
+<body>
+
+<h1>The CSES Roadmap: From Pupil to Specialist</h1>
+<div class="lesson-meta">
+  <span class="lesson-number">Lesson 002</span> · Sep 28, 2026 · 
+  <a href="0001-the-consistency-system.html">← Previous: The Consistency System</a>
+</div>
+
+<div class="stat-row">
+  <div class="stat-card">
+    <div class="stat-num num-pupil">1208</div>
+    <div class="stat-label">Current Rating</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num num-pupil">1232</div>
+    <div class="stat-label">Max Rating</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num num-specialist">1400</div>
+    <div class="stat-label">Target (Specialist)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num num-warning">192</div>
+    <div class="stat-label">Points to Go</div>
+  </div>
+</div>
+
+<p>You've earned Pupil. The exams are over. This is the window.</p>
+<p>This lesson lays out a <strong>structured 8-week roadmap</strong> that maps your CF weak spots to specific CSES sections and 1400-rated CF problems. Every problem on this list was chosen because it targets the exact skill gap between your current rating and Specialist.</p>
+
+<div class="card card-accent">
+  <h4>The Core Idea</h4>
+  <p><strong>CSES</strong> builds the technique. <strong>CF 1400s</strong> test whether you can apply it under contest pressure. You alternate between the two: learn a pattern on CSES, then prove you own it on CF.</p>
+</div>
+
+<h2>Your Weak Spot Map</h2>
+
+<p>Here's why you're stuck at 1200 and not 1400. The tags that dominate Div2-C at 1400 rating are <em>exactly</em> the ones you've underinvested in:</p>
+
+<table>
+  <tr><th>Topic</th><th>Your Solves</th><th>Frequency at 1400</th><th>Gap</th></tr>
+  <tr><td>DP</td><td>47</td><td>🔴 High</td><td>Critical</td></tr>
+  <tr><td>Graphs (DFS/BFS/DSU)</td><td>6 DFS</td><td>🟡 Moderate</td><td>Severe</td></tr>
+  <tr><td>Data Structures</td><td>41</td><td>🟡 Moderate</td><td>Moderate</td></tr>
+  <tr><td>Binary Search</td><td>varies</td><td>🟡 Moderate</td><td>Polish</td></tr>
+  <tr><td style="color: var(--text-muted)">Greedy/Math</td><td style="color: var(--text-muted)">277 / 205</td><td style="color: var(--text-muted)">High (but you're already strong)</td><td style="color: var(--text-muted)">—</td></tr>
+</table>
+
+<div class="card card-warning">
+  <h4>The 1300→1400 Wall</h4>
+  <p>You've solved 104 problems at rating 1300, but only 15 at 1400. That's a <strong>7× dropoff</strong>. The problems at 1400 aren't harder in a general sense — they require specific algorithmic patterns (DP transitions, graph modeling, clever binary search) that greedy intuition alone can't crack.</p>
+</div>
+
+<h2>The 8-Week Roadmap</h2>
+
+<div class="progress-track">
+  <div class="progress-seg seg-current" title="Week 1-2: DP Foundations"></div>
+  <div class="progress-seg seg-todo" title="Week 3-4: DP + Graphs"></div>
+  <div class="progress-seg seg-todo" title="Week 5-6: Graphs + DS"></div>
+  <div class="progress-seg seg-todo" title="Week 7-8: Integration"></div>
+</div>
+
+<!-- ═══════════════ PHASE 1 ═══════════════ -->
+<h3>Phase 1: DP Foundations (Weeks 1–2)</h3>
+<p>DP is the biggest unlock. At 1400, you'll see linear DP, grid DP, and simple state-based DP constantly. The CSES DP section is the best structured problem set for this.</p>
+
+<div class="phase">
+  <div class="phase-dot"></div>
+  <div class="phase-header">
+    <span class="phase-week">Week 1</span>
+    <span class="phase-title">CSES DP — Core Patterns</span>
+  </div>
+  <p>Do these in order. Each one teaches a specific DP archetype.</p>
+  <div class="problem-grid">
+    <a class="problem-link" href="https://cses.fi/problemset/task/1633" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Dice Combinations</span>
+      <span class="diff">basic</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1634" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Minimizing Coins</span>
+      <span class="diff">basic</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1635" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Coin Combinations I</span>
+      <span class="diff">basic</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1636" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Coin Combinations II</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1637" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Removing Digits</span>
+      <span class="diff">basic</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1638" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Grid Paths</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1158" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Book Shop</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1745" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Money Sums</span>
+      <span class="diff">medium</span>
+    </a>
+  </div>
+
+  <p style="margin-top: 0.75rem;"><strong>Then prove it on CF:</strong></p>
+  <div class="problem-grid">
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1791/G1" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Teleporters (Easy)</span>
+      <span class="diff">1300</span>
+    </a>
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1999/E" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Triple Operations</span>
+      <span class="diff">1300</span>
+    </a>
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1472/D" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Even-Odd Game</span>
+      <span class="diff">1200</span>
+    </a>
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1525/C" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Robot Collisions</span>
+      <span class="diff">1400</span>
+    </a>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-dot"></div>
+  <div class="phase-header">
+    <span class="phase-week">Week 2</span>
+    <span class="phase-title">CSES DP — Subsequences & Harder</span>
+  </div>
+  <p>Now the DP gets real. These problems require you to think about states more carefully.</p>
+  <div class="problem-grid">
+    <a class="problem-link" href="https://cses.fi/problemset/task/1746" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Array Description</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1140" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Projects</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1145" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Increasing Subsequence</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1639" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Edit Distance</span>
+      <span class="diff">hard</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1744" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Rectangle Cutting</span>
+      <span class="diff">hard</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/2181" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Counting Towers</span>
+      <span class="diff">hard</span>
+    </a>
+  </div>
+
+  <p style="margin-top: 0.75rem;"><strong>CF problems — DP at 1400:</strong></p>
+  <div class="problem-grid">
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1873/G" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">ABBC or BACB</span>
+      <span class="diff">1400</span>
+    </a>
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1850/G" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">The Morning Star</span>
+      <span class="diff">1400</span>
+    </a>
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1829/G" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Hits Different</span>
+      <span class="diff">1400</span>
+    </a>
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1766/C" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Hamiltonian Wall</span>
+      <span class="diff">1400</span>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════ PHASE 2 ═══════════════ -->
+<h3>Phase 2: Graphs + More DP (Weeks 3–4)</h3>
+<p>With DP patterns in your muscle memory, you add graphs. At 1400, graph problems are about <em>modeling</em> — recognizing when something is a graph problem, not the algorithm itself.</p>
+
+<div class="phase">
+  <div class="phase-dot"></div>
+  <div class="phase-header">
+    <span class="phase-week">Week 3</span>
+    <span class="phase-title">CSES Graphs — Traversals & Connectivity</span>
+  </div>
+  <div class="problem-grid">
+    <a class="problem-link" href="https://cses.fi/problemset/task/1666" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Building Roads</span>
+      <span class="diff">basic</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1668" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Building Teams</span>
+      <span class="diff">basic</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1669" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Round Trip</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1667" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Message Route</span>
+      <span class="diff">basic</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1671" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Shortest Routes I</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1672" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Shortest Routes II</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1679" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Course Schedule</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1682" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Flight Routes Check</span>
+      <span class="diff">medium</span>
+    </a>
+  </div>
+
+  <p style="margin-top: 0.75rem;"><strong>CF graph problems at 1300-1400:</strong></p>
+  <div class="problem-grid">
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1881/F" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Minimum Maximum Distance</span>
+      <span class="diff">1400</span>
+    </a>
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1858/C" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Yet Another Permutation</span>
+      <span class="diff">1400</span>
+    </a>
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1702/E" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Split Into Two Sets</span>
+      <span class="diff">1400</span>
+    </a>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-dot"></div>
+  <div class="phase-header">
+    <span class="phase-week">Week 4</span>
+    <span class="phase-title">DSU + Topological Sort + Mixed</span>
+  </div>
+  <div class="problem-grid">
+    <a class="problem-link" href="https://cses.fi/problemset/task/1676" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Road Construction</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1675" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Road Reparation</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1680" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Longest Flight Route</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1681" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Game Routes</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1678" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Round Trip II</span>
+      <span class="diff">hard</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1683" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Planets and Kingdoms</span>
+      <span class="diff">hard</span>
+    </a>
+  </div>
+
+  <p style="margin-top: 0.75rem;"><strong>CF problems — DSU/Graphs 1400:</strong></p>
+  <div class="problem-grid">
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1833/E" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Round Dance</span>
+      <span class="diff">1400</span>
+    </a>
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1850/H" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">The Third Letter</span>
+      <span class="diff">1400</span>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════ PHASE 3 ═══════════════ -->
+<h3>Phase 3: Sorting/Searching Gaps + Data Structures (Weeks 5–6)</h3>
+<p>You're decent at sorting/searching but some CSES problems in this section test prefix sums, binary search on answer, and multiset/ordered-set usage — all showing up at 1400.</p>
+
+<div class="phase">
+  <div class="phase-dot"></div>
+  <div class="phase-header">
+    <span class="phase-week">Week 5</span>
+    <span class="phase-title">CSES Sorting & Searching — The Gaps</span>
+  </div>
+  <div class="problem-grid">
+    <a class="problem-link" href="https://cses.fi/problemset/task/1163" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Traffic Lights</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1164" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Room Allocation</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1620" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Factory Machines</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/2168" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Nested Ranges Check</span>
+      <span class="diff">hard</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/2169" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Nested Ranges Count</span>
+      <span class="diff">hard</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1076" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Sliding Median</span>
+      <span class="diff">hard</span>
+    </a>
+  </div>
+
+  <p style="margin-top: 0.75rem;"><strong>CF — binary search on answer / sorting tricks:</strong></p>
+  <div class="problem-grid">
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1862/D" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Ice Cream Balls</span>
+      <span class="diff">1400</span>
+    </a>
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1843/E" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Tracking Segments</span>
+      <span class="diff">1400</span>
+    </a>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-dot"></div>
+  <div class="phase-header">
+    <span class="phase-week">Week 6</span>
+    <span class="phase-title">CSES Range Queries (intro) + Prefix Mastery</span>
+  </div>
+  <p>You don't need segment trees yet. But prefix sums, difference arrays, and basic range queries are everywhere at 1400.</p>
+  <div class="problem-grid">
+    <a class="problem-link" href="https://cses.fi/problemset/task/1646" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Static Range Sum Queries</span>
+      <span class="diff">basic</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1647" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Static Range Min Queries</span>
+      <span class="diff">basic</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1648" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Dynamic Range Sum Queries</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1649" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Dynamic Range Min Queries</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1651" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Range Update Queries</span>
+      <span class="diff">medium</span>
+    </a>
+    <a class="problem-link" href="https://cses.fi/problemset/task/1652" target="_blank">
+      <span class="source source-cses">CSES</span>
+      <span class="name">Forest Queries</span>
+      <span class="diff">medium</span>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════ PHASE 4 ═══════════════ -->
+<h3>Phase 4: Integration & Contest Simulation (Weeks 7–8)</h3>
+<p>By now you have the techniques. This phase is about <em>recognizing which technique to apply</em> under time pressure.</p>
+
+<div class="phase">
+  <div class="phase-dot"></div>
+  <div class="phase-header">
+    <span class="phase-week">Week 7-8</span>
+    <span class="phase-title">Mixed Practice + Virtual Contests</span>
+  </div>
+
+  <div class="card card-accent">
+    <h4>Weekly Schedule</h4>
+    <div class="daily-box">
+      <span class="daily-time">Mon-Tue</span>
+      <span>Upsolve last contest + 2 unsolved CSES problems</span>
+      <span class="daily-time">Wed</span>
+      <span>Virtual contest (past Div2 round, rated 1500-1700)</span>
+      <span class="daily-time">Thu-Fri</span>
+      <span>3× CF 1400-rated problems (filtered by DP/graphs/DS)</span>
+      <span class="daily-time">Sat</span>
+      <span>Live rated contest</span>
+      <span class="daily-time">Sun</span>
+      <span>Upsolve Saturday's contest + review week's learning</span>
+    </div>
+  </div>
+
+  <p style="margin-top: 0.75rem;"><strong>CF 1400-1500 mixed practice (try these blind, no tag filter):</strong></p>
+  <div class="problem-grid">
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1903/C" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Theofanis' Nightmare</span>
+      <span class="diff">1400</span>
+    </a>
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1837/D" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Bracket Coloring</span>
+      <span class="diff">1400</span>
+    </a>
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1811/C" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Tickets</span>
+      <span class="diff">1400</span>
+    </a>
+    <a class="problem-link" href="https://codeforces.com/problemset/problem/1872/E" target="_blank">
+      <span class="source source-cf">CF</span>
+      <span class="name">Data Structures Fan</span>
+      <span class="diff">1500</span>
+    </a>
+  </div>
+</div>
+
+<h2>Daily Routine (3 hrs)</h2>
+
+<div class="card card-success">
+  <h4>The Post-Exams Daily Block</h4>
+  <div class="daily-box">
+    <span class="daily-time">0:00–0:30</span>
+    <span><strong>Warm-up:</strong> 1× CF problem at 1200-1300 (speed training — solve in under 15 min)</span>
+    <span class="daily-time">0:30–1:30</span>
+    <span><strong>CSES grind:</strong> 1-2 CSES problems from current phase (learn the pattern, don't rush)</span>
+    <span class="daily-time">1:30–2:30</span>
+    <span><strong>CF 1400 practice:</strong> 1× problem at 1400. Struggle for 40 min, then read editorial if stuck.</span>
+    <span class="daily-time">2:30–3:00</span>
+    <span><strong>Review:</strong> Write down what you learned. If you read an editorial, re-implement from scratch.</span>
+  </div>
+</div>
+
+<h2>Rules of Engagement</h2>
+
+<ul class="checklist">
+  <li><strong>Never skip the reimplementation.</strong> If you read an editorial, close it, and code the solution from memory. This is where storage strength is built.</li>
+  <li><strong>CSES before CF each day.</strong> CSES teaches the pattern. CF tests if you've internalized it. Order matters.</li>
+  <li><strong>Don't skip contests.</strong> Rate every Div2/Div3 you can. Rating only moves when you compete. Aim for 1-2 contests per week minimum.</li>
+  <li><strong>Track what stumped you.</strong> After each session, note the problem and why you got stuck. Revisit those problems 1 week later.</li>
+  <li><strong>No problems below 1200.</strong> You've outgrown them. Every minute on an 800-rated problem is a minute not spent in your zone of proximal development.</li>
+</ul>
+
+<h2>How to Know It's Working</h2>
+
+<table>
+  <tr><th>Milestone</th><th>Expected By</th><th>Signal</th></tr>
+  <tr><td>CSES DP section complete (first 14)</td><td>End of Week 2</td><td>Can solve Coin Combinations II, Book Shop, Edit Distance</td></tr>
+  <tr><td>CF 1400 solve rate ≥ 40%</td><td>End of Week 3</td><td>Can solve 2 of 5 random 1400-rated CF problems</td></tr>
+  <tr><td>CSES Graph section (first 10)</td><td>End of Week 4</td><td>Dijkstra, topo sort, SCC feel routine</td></tr>
+  <tr><td>Rating hits 1300</td><td>End of Week 5</td><td>Sustained, not a single spike</td></tr>
+  <tr><td>Rating hits 1350+</td><td>End of Week 7</td><td>Solving Div2-C in at least 50% of contests</td></tr>
+  <tr><td><strong>Specialist (1400+)</strong></td><td>End of Week 8</td><td>Consistent C solves, no breaks > 3 days</td></tr>
+</table>
+
+<h2>Primary Source</h2>
+
+<div class="card card-accent">
+  <h4>📖 Competitive Programmer's Handbook — Antti Laaksonen</h4>
+  <p>Free PDF: <a href="https://cses.fi/book/book.pdf" target="_blank">cses.fi/book/book.pdf</a></p>
+  <p>The CSES problem set is designed to be solved alongside this book. Chapters 7 (DP), 11-12 (Graphs), and 9 (Range Queries) map directly to the phases above. Read the relevant chapter <em>before</em> starting each phase.</p>
+</div>
+
+<hr>
+
+<div class="lesson-footer">
+  <p>🤖 <strong>Questions?</strong> Ask your teacher — I can explain any problem, adjust the pace, or add/remove problems from this roadmap. This plan is not set in stone; it's a living document.</p>
+  <p>
+    <a href="../reference/daily-practice-checklist.html">📋 Daily Practice Checklist</a> · 
+    <a href="0001-the-consistency-system.html">← Lesson 001: The Consistency System</a>
+  </p>
+</div>
+
+<script src="../assets/quiz.js"></script>
+</body>
+</html>
