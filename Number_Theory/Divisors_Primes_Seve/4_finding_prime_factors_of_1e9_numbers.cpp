@@ -15,7 +15,7 @@ using namespace std;
 vector <long long> find_pf(long long n){
     vector <long long> primes;
     long long i = 2;
-    while(i*i < n){
+    while(i*i <= n){
         if(n%i == 0){
             primes.push_back(i);
             while(n%i == 0) n/=i;

@@ -1,5 +1,9 @@
 #include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+
 using namespace std;
+using namespace __gnu_pbds;
 
 #define int long long
 #define ll long long
@@ -24,13 +28,13 @@ void PB(int a){
     }
     cout << endl;
 }
+
 // Function to left rotate vector by k positions
 void leftRotate(std::vector<int>& vec, int k) {
     if (vec.empty()) return;
     k = k % vec.size(); // handle large k
     std::rotate(vec.begin(), vec.begin() + k, vec.end());
 }
-
 // Function to right rotate vector by k positions
 void rightRotate(std::vector<int>& vec, int k) {
     if (vec.empty()) return;
@@ -38,40 +42,40 @@ void rightRotate(std::vector<int>& vec, int k) {
     std::rotate(vec.begin(), vec.end() - k, vec.end());
 }
 
+//TC: O(1)
 bool isPerfectSquareFast(long long n) {
     if (n < 0) return false;
-
-    // Fast O(1) filtering using a lookup bitmask for hexadecimal endings
-    // Perfect squares can only end in 0, 1, 4, or 9 in base 16
-    int h = n & 0xF; // Equivalent to n % 16
+    int h = n & 0xF;
     if (h > 9 || h == 2 || h == 3 || h == 5 || h == 6 || h == 7 || h == 8) {
         return false; 
     }
-
-    // Only compute the hardware square root if it passes the filter
     long long root = std::round(std::sqrt(n));
     return (root * root == n);
 }
 
+/**
+ * Compresses an array by summing adjacent elements that share the same sign,
+ * resulting in an array of alternating positive and negative sums. 
+ * If a clump's sum becomes exactly 0, it absorbs the next element and takes its sign.
+ * @param dir: 0 for Left-to-Right traversal, 1 for Right-to-Left.
+ */
 template<typename T>
 vector<T> clump_signs(const vector<T>& arr, int dir = 0) {
     vector<T> store;
     if (arr.empty()) return store;
-    // Helper lambda to process each element cleanly
     auto process = [&](T x) {
         if (store.empty()) {
             store.push_back(x);
             return;
         }
         T last = store.back();
-        //clump if both positive, both negative, or current sum is 0
-        if ((last > 0 && x > 0) || (last < 0 && x < 0) || last == 0) store.back() += x;
-        else store.push_back(x);
+        if ((last > 0 && x > 0) || (last < 0 && x < 0) || last == 0) 
+            store.back() += x;
+        else 
+            store.push_back(x);
     };
-    // dir == 0: Left to Right
-    // dir == 1: Right to Left
     if (dir == 0) {
-        for (int i = 0; i < arr.size(); i++) process[arr[i]];
+        for (int i = 0; i < arr.size(); i++) process(arr[i]);
     } 
     else {
         for (int i = (int)arr.size() - 1; i >= 0; i--) process(arr[i]);
@@ -79,8 +83,24 @@ vector<T> clump_signs(const vector<T>& arr, int dir = 0) {
     return store;
 }
 
+//provide 2-d vect and val to fill
+void fill_2d(vector <vector<int>> &arr, int value_to_fill){
+    int rows = arr.size();
+    int cols = arr[0].size();
+    arr.assign(rows, vector<int>(cols, value_to_fill));
+}
 
-
+//finding total number of inversions in array
+typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
+long long countInversionsPBDS(const vector<int>& b) {
+    ordered_set pbds;
+    long long inversions = 0;
+    for (int i = b.size() - 1; i >= 0; i--) {
+        inversions += pbds.order_of_key(b[i]);
+        pbds.insert(b[i]);
+    }
+    return inversions;
+}
 
 int topbit(ll x) { return (x == 0 ? -1 : 63 - __builtin_clzll(x));}
 int lowbit(ll x) { return (x == 0 ? -1 : __builtin_ctzll(x));}
